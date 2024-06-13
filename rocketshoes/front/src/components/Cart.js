@@ -7,19 +7,19 @@ const Cart = ({ cart, setCart }) => {
   const getInitialQuantities = () => {
     const savedQuantities = JSON.parse(localStorage.getItem('cartQuantities')) || {};
     return cart.map(item => ({
-      id:item.id,
+      id: item.id,
       quantity: savedQuantities[item.id] || 1
     }));
   };
-  
+
   const [quantities, setQuantities] = useState(
     getInitialQuantities());
 
-    useEffect(() => {
-      localStorage.setItem('cartQuantities', JSON.stringify(
-        quantities.reduce((acc,q) => ({ ...acc, [q.id]: q.quantity}), {})
-      ));
-    },[quantities]);
+  useEffect(() => {
+    localStorage.setItem('cartQuantities', JSON.stringify(
+      quantities.reduce((acc, q) => ({ ...acc, [q.id]: q.quantity }), {})
+    ));
+  }, [quantities]);
 
   const handleQuantityChange = (id, newQuantity) => {
     const newQuantities = quantities.map((q) =>
@@ -148,8 +148,6 @@ const Cart = ({ cart, setCart }) => {
               <p className="text-xl text-black mr-80">Total: ${getTotal().toFixed(2)}</p>
             </div>
           </ul>
-
-
         </div>
       )}
     </div>
